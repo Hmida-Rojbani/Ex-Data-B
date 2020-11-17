@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CinemaServiceImpl implements CinemaService{
 	
+	private static List<Movie> movieTmp;
 	private MovieRepository reposMovie;
 	private StarRepository reposStar;
 	private StudioRepository reposStudio;
@@ -45,8 +47,34 @@ public class CinemaServiceImpl implements CinemaService{
 
 	@Override
 	public List<Movie> getColoredMovieByStudio(String studioName) {
-		// TODO Auto-generated method stub
-		return null;
+		Studio studio = reposStudio.findById(studioName)
+				.orElseThrow(()-> new NoSuchElementException("studio with this name is not found"));
+		/*
+		List<Movie> movies = new ArrayList<>();
+		
+		for (Movie movie : studio.getMovies()) {
+			if(movie.getColor() == 1)
+				movies.add(movie);
+		}
+		
+		return movies;
+		*/
+		return studio.getMovies()
+				.stream()
+				.filter(movie -> movie.getColor() == 1)
+				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<Movie> getMovieByNameDynmic(String preffixMovieName) {
+		if(movieTmp == null)
+			movieTmp = reposMovie.findAll();
+		
+		return movieTmp.stream()
+					 .filter(m -> m.getTitle().startsWith(preffixMovieName))
+					 .collect(Collectors.toList());
+	}
+	
+	
 
 }

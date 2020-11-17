@@ -17,8 +17,8 @@ INSERT INTO "MOVIES" VALUES
 ('Movie2', 0, TIME '01:56:39', 1989, 'Std1'),
 ('Movie3', 1, TIME '02:02:44', 2005, 'Std1'),
 ('Movie4', 1, TIME '01:30:19', 2000, 'Std2'),
-('Movie5', 0, TIME '01:34:19', 1990, 'Std3');
-
+('Movie5', 0, TIME '01:34:19', 1990, 'Std3'),
+('Inception', 0, TIME '01:34:19', 1990, 'Std3');
 INSERT INTO "STARS_IN" VALUES
 ('Movie1', 'John'),
 ('Movie1', 'Monica'),

@@ -9,5 +9,6 @@ public interface CinemaService {
 	
 	public List<Studio> getSudiosByStar(String starName);
 	public List<Movie> getColoredMovieByStudio(String studioName);
+	public List<Movie> getMovieByNameDynmic(String movieName);
 
 }

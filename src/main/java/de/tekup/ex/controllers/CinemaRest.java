@@ -31,6 +31,11 @@ public class CinemaRest {
 		return service.getColoredMovieByStudio(studioName);
 	}
 	
+	@GetMapping("/api/cinema/movie/{name}/like")
+	public List<Movie> getStartOfMovie(@PathVariable("name")String preffix){
+		return service.getMovieByNameDynmic(preffix);
+	}
+	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException e) {
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
